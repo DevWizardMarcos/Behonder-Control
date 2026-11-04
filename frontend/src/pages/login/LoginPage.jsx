@@ -3,7 +3,6 @@ import "../../styles/pages/login.css";
 
 import {
   ArrowEnterIcon,
-  Crown,
   EmailIcon,
   EyeOffIcon,
   LockIcon,
@@ -17,12 +16,12 @@ function PhoenixLogo({ className = "Fenix" }) {
     <img
       className={className}
       src={Fenix}
-      alt="Ilustracao inspirada no universo Infinity"
+      alt="Identidade visual da Behonder Control"
     />
   );
 }
 
-function LoginPage({ onLoginSuccess }) {
+function LoginPage({ onLoginSuccess, onForgotPassword }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -45,30 +44,25 @@ function LoginPage({ onLoginSuccess }) {
 
   return (
     <main className="login-shell">
-      <section className="login-card" aria-label="Tela de login Infinity Stock">
+      <section className="login-card" aria-label="Tela de login Behonder Control">
         <div className="login-card__art">
           <img
             src={BannerLogin}
-            alt="Ilustracao inspirada no universo Infinity"
+            alt="Identidade visual da Behonder Control"
           />
           <div className="login-card__overlay-copy"></div>
         </div>
 
         <div className="login-card__panel">
-          <div className="panel-brandbar">
-            <span>INFINITY SCHOOL</span>
-            <Crown />
-          </div>
-
           <div className="panel-content">
             <div className="hero-brand">
               <PhoenixLogo className="hero-brand__icon" />
               <div className="hero-brand__title">
                 <span className="hero-brand__line hero-brand__line--light">
-                  infinity
+                  Behonder
                 </span>
                 <span className="hero-brand__line hero-brand__line--accent">
-                  Stock
+                  Control
                 </span>
                 <p>Contabilizador de estoque em aplicativo!</p>
               </div>
@@ -122,7 +116,13 @@ function LoginPage({ onLoginSuccess }) {
                   <input id="remember" type="checkbox" />
                   <span>Lembrar de mim</span>
                 </label>
-                <a href="#recuperar">Esqueceu sua senha?</a>
+                <button
+                  type="button"
+                  className="forgot-password-link"
+                  onClick={onForgotPassword}
+                >
+                  Esqueceu sua senha?
+                </button>
               </div>
 
               {error && <p className="login-form__error">{error}</p>}

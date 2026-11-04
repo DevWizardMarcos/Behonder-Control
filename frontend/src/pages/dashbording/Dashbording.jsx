@@ -2,6 +2,8 @@ import "../../styles/pages/dashbording.css";
 import FenixLogo from "../../assets/images/fenixLogo.png";
 import Avatar from "../../assets/images/avatar.png";
 import FenixLogoSideBar from "../../assets/images/fenixLogoSideBar.png";
+import OnlineImg from "../../assets/images/inspiracao/online.png";
+import OfflineImg from "../../assets/images/inspiracao/offiline.png";
 const menuItems = [
   { label: "Sala 01", icon: "monitor", active: true },
   { label: "Sala 02", icon: "monitor" },
@@ -10,15 +12,48 @@ const menuItems = [
   { label: "Configurações", icon: "gear" },
 ];
 
+const STATUS_IMAGE = {
+  online: OnlineImg,
+  "em-uso": OnlineImg,
+  offline: OfflineImg,
+};
+
+const STATUS_LABEL = {
+  online: "Online",
+  "em-uso": "Em uso",
+  offline: "Offline",
+};
+
+const columns = [
+  {
+    title: "COLUNA 1",
+    pcs: [
+      { name: "PC01", status: "online" },
+      { name: "PC02", status: "online" },
+      { name: "PC03", status: "em-uso" },
+      { name: "PC04", status: "offline" },
+    ],
+  },
+  {
+    title: "COLUNA 2",
+    pcs: [
+      { name: "PC05", status: "online" },
+      { name: "PC06", status: "online" },
+      { name: "PC07", status: "em-uso" },
+      { name: "PC08", status: "offline" },
+    ],
+  },
+];
+
 function Dashbording() {
   return (
     <main className="dashboard">
       <header className="dashboard-header">
         <div className="brand">
-          <img src={FenixLogo} alt="Infinity Stock" className="brand__logo" />
+          <img src={FenixLogo} alt="Behonder Control" className="brand__logo" />
           <div className="brand__name">
-            <span className="brand__light">INFINITY</span>
-            <span className="brand__accent"> STOCK</span>
+            <span className="brand__light">BEHONDER</span>
+            <span className="brand__accent"> CONTROL</span>
           </div>
         </div>
 
@@ -104,7 +139,28 @@ function Dashbording() {
           </div>
         </aside>
 
-        <section className="dashboard-content">Conteudo aqui</section>
+        <section className="dashboard-content">
+          {columns.map((col) => (
+            <div className="pc-column" key={col.title}>
+              <h3 className="pc-column__title">{col.title}</h3>
+              <div className="pc-grid">
+                {col.pcs.map((pc) => (
+                  <article className="pc-card" key={pc.name}>
+                    <span className="pc-card__name">{pc.name}</span>
+                    <img
+                      className="pc-card__img"
+                      src={STATUS_IMAGE[pc.status]}
+                      alt={`${pc.name} - ${STATUS_LABEL[pc.status]}`}
+                    />
+                    <span className={`pc-card__status is-${pc.status}`}>
+                      {STATUS_LABEL[pc.status]}
+                    </span>
+                  </article>
+                ))}
+              </div>
+            </div>
+          ))}
+        </section>
       </div>
     </main>
   );
